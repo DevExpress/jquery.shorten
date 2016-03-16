@@ -29,7 +29,9 @@
             onLess: function() {},
             onMore: function() {},
             errMsg: null,
-            force: false
+            force: false,
+            showTooltip: true,
+            showPopover: false,
         };
 
         if (settings) {
@@ -138,7 +140,12 @@
 
                 var html = '<div class="shortcontent">' + c +
                     '</div><div class="allcontent">' + content +
-                    '</div><span><a href="javascript://nop/" class="morelink">' + config.moreText + '</a></span>';
+                    '</div><span><a href="javascript://nop/" class="morelink"';
+                if (config.showTooltip)
+                    html += ' data-toggle="tooltip" title="' + $this.text() + '"';
+                if (config.showPopover)
+                    html += ' data-toggle="popover" data-content="' + $this.text() + '"';
+                html += '>' + config.moreText + '</a></span>';
 
                 $this.html(html);
                 $this.find(".allcontent").hide(); // Hide all text
