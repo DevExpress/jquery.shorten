@@ -31,7 +31,7 @@
             errMsg: null,
             force: false,
             showTooltip: true,
-            showPopover: false,
+            showPopover: false
         };
 
         if (settings) {
@@ -148,8 +148,11 @@
                 html += '>' + config.moreText + '</a></span>';
 
                 $this.html(html);
-                $this.find(".allcontent").hide(); // Hide all text
+                var allContent = $this.find(".allcontent");
+                allContent.hide(); // Hide all text
                 $('.shortcontent p:last', $this).css('margin-bottom', 0); //Remove bottom margin on last paragraph as it's likely shortened
+                var where = $this.find('.morelink');
+                $(document).trigger('afterShorten', [$this, allContent, where]);
             }
         });
 
