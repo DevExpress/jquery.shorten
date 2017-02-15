@@ -16,7 +16,8 @@
 ** I've also added brackets where they werent added just for readability (mostly for me).
 */
 
-(function($) {
+(function ($) {
+    var shortenTextRegex = /\"/g;
     $.fn.shorten = function(settings) {
         "use strict";
 
@@ -137,14 +138,14 @@
                 }else{
                     c+=config.ellipsesText;
                 }
-
                 var html = '<div class="shortcontent">' + c +
                     '</div><div class="allcontent">' + content +
                     '</div><span><a href="javascript://nop/" class="morelink"';
+                var text = $this.text().replace(shortenTextRegex, "'");
                 if (config.showTooltip)
-                    html += ' data-toggle="tooltip" title="' + $this.text() + '"';
+                    html += ' data-toggle="tooltip" title="' + text + '"';
                 if (config.showPopover)
-                    html += ' data-toggle="popover" data-content="' + $this.text() + '"';
+                    html += ' data-toggle="popover" data-content="' + text + '"';
                 html += '>' + config.moreText + '</a></span>';
 
                 $this.html(html);
